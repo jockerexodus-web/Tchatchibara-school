@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tchatchibara School - Accueil</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">Tchatchibara <span>School</span></div>
+        <div class="nav-links">
+            <a href="index.html" class="active">🏠 Accueil</a>
+            <a href="cours.html">📚 Cours</a>
+            <a href="profil.html">👤 Profil</a>
+            <a href="compte.html" class="btn-compte">Créer un compte</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+        <h1>Bienvenue à <span>Tchatchibara School</span></h1>
+        <p>Tous les cours de la 1ère à la Terminale, accessibles gratuitement. Téléchargez vos PDF et réussissez brillamment !</p>
+        <div class="search-box">
+            <input type="text" placeholder="Rechercher un cours..." onkeyup="rechercher(this.value)">
+            <button onclick="document.querySelector('.search-box input').focus()">🔍</button>
+        </div>
+    </div>
+
+    <!-- COURS POPULAIRES -->
+    <section>
+        <h2 class="section-title">Cours populaires</h2>
+        <div class="cours-grid" id="coursPopulaires"></div>
+        <div style="text-align:center; margin-top:40px;">
+            <a href="cours.html" class="btn-principal">Voir tous les cours →</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        &copy; 2025 <span>Tchatchibara School</span> — Tous droits réservés.
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Afficher 3 cours populaires sur la page d'accueil
+        document.addEventListener("DOMContentLoaded", () => {
+            const pop = coursData.slice(0, 3);
+            const grid = document.getElementById("coursPopulaires");
+            pop.forEach(c => {
+                grid.innerHTML += `
+                    <div class="carte-cours">
+                        <div class="matiere">${c.matiere}</div>
+                        <h3>${c.titre}</h3>
+                        <span class="niveau-tag">${c.niveau}</span>
+                        <p>${c.desc}</p>
+                        <a class="btn-pdf" onclick="telechargerPDF('${c.pdf}', '${c.titre}')">📥 Télécharger le PDF</a>
+                    </div>`;
+            });
+        });
+    </script>
+</body>
+</html>
