@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compte - Tchatchibara School</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">Tchatchibara <span>School</span></div>
+        <div class="nav-links">
+            <a href="index.html">🏠 Accueil</a>
+            <a href="cours.html">📚 Cours</a>
+            <a href="profil.html">👤 Profil</a>
+            <a href="compte.html" class="btn-compte active">Créer un compte</a>
+        </div>
+    </nav>
+
+    <section style="padding-top: 60px;">
+        <h2 class="section-title">Mon Compte</h2>
+
+        <div class="compte-container">
+
+            <!-- INSCRIPTION -->
+            <div class="form-card">
+                <h3>Créer un compte</h3>
+                <form onsubmit="creerCompte(event)">
+                    <input type="text" id="signupNom" placeholder="Nom complet" required>
+                    <input type="email" id="signupEmail" placeholder="Adresse email" required>
+                    <input type="password" id="signupPassword" placeholder="Mot de passe (min. 6 car.)" required minlength="6">
+                    <select id="signupNiveau">
+                        <option value="">-- Choisir votre niveau --</option>
+                        <option value="1ère">1ère</option>
+                        <option value="Terminale">Terminale</option>
+                    </select>
+                    <button type="submit">S'inscrire</button>
+                </form>
+            </div>
+
+            <!-- CONNEXION -->
+            <div class="form-card">
+                <h3>Se connecter</h3>
+                <form onsubmit="connexion(event)">
+                    <input type="email" id="loginEmail" placeholder="Adresse email" required>
+                    <input type="password" id="loginPassword" placeholder="Mot de passe" required>
+                    <button type="submit">Se connecter</button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2025 <span>Tchatchibara School</span> — Tous droits réservés.
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
