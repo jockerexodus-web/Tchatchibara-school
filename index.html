@@ -2,64 +2,113 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tchatchibara School - Accueil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1e3c72">
+    <title>Tchatchibara School</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav>
-        <div class="logo">Tchatchibara <span>School</span></div>
-        <div class="nav-links">
-            <a href="index.html" class="active">🏠 Accueil</a>
-            <a href="cours.html">📚 Cours</a>
-            <a href="profil.html">👤 Profil</a>
-            <a href="compte.html" class="btn-compte">Créer un compte</a>
+    <!-- CONTENU PRINCIPAL -->
+    <main id="app">
+
+        <!-- PAGE ACCUEIL -->
+        <div id="page-accueil" class="page active">
+            <header class="app-header">
+                <div class="tabs-top">
+                    <span class="tab active">Accueil</span>
+                    <span class="tab" onclick="goToPage('cours')">Cours</span>
+                </div>
+            </header>
+
+            <div class="hero-app">
+                <h1>Bienvenue sur</h1>
+                <h2>TCHATCHIBARA-WEB<br>SCHOOL</h2>
+                <p class="desc">
+                    Plateforme éducative conforme au programme officiel du Gabon. Cours, exercices corrigés, devoirs du Bac et explications détaillées.
+                </p>
+                <p class="credit">Informatique by SAKAMOTO Dev.</p>
+                <button class="btn-orange" onclick="goToPage('cours')">Voir les cours</button>
+            </div>
+
+            <div class="section-programme">
+                <h3>Programme du Gabon</h3>
+                <div class="niveaux-app">
+                    <button class="btn-niveau orange" onclick="goToPage('cours', '2nde')">2nde</button>
+                    <button class="btn-niveau jaune" onclick="goToPage('cours', '1ère')">1ère</button>
+                    <button class="btn-niveau jaune" onclick="goToPage('cours', 'Terminale')">Terminale</button>
+                </div>
+                <button class="btn-epreuve" onclick="goToPage('cours', 'Bac')">Épreuves Bac</button>
+            </div>
         </div>
+
+        <!-- PAGE COURS -->
+        <div id="page-cours" class="page">
+            <header class="app-header">
+                <h2 class="header-title">📚 Les Cours</h2>
+            </header>
+
+            <div class="niveaux-app" style="padding: 15px;">
+                <button class="btn-niveau active-niv" onclick="filtrerNiveau('tous', this)">Tous</button>
+                <button class="btn-niveau" onclick="filtrerNiveau('2nde', this)">2nde</button>
+                <button class="btn-niveau" onclick="filtrerNiveau('1ère', this)">1ère</button>
+                <button class="btn-niveau" onclick="filtrerNiveau('Terminale', this)">Terminale</button>
+            </div>
+
+            <div class="cours-grid-app" id="coursGrid"></div>
+        </div>
+
+        <!-- PAGE PROFIL -->
+        <div id="page-profil" class="page">
+            <header class="app-header">
+                <h2 class="header-title">👤 Mon Profil</h2>
+            </header>
+
+            <div class="profil-app">
+                <div class="avatar-app" id="avatar">?</div>
+                <h2 id="profilNom">Invité</h2>
+                <p class="email-app" id="profilEmail">Connectez-vous pour voir votre profil</p>
+
+                <div class="stats-app">
+                    <div class="stat-item">
+                        <h4 id="statCours">0</h4>
+                        <p>Cours</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4 id="statPdf">0</h4>
+                        <p>PDF</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4 id="statNiveau">-</h4>
+                        <p>Niveau</p>
+                    </div>
+                </div>
+
+                <a href="compte.html" class="btn-orange" style="display:block; margin-top:30px; text-decoration:none; text-align:center;">
+                    Modifier / Créer un compte
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- BOTTOM NAVIGATION BAR -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active" onclick="goToPage('accueil'); return false;">
+            <span class="icon">🏠</span>
+            <span class="label">Accueil</span>
+        </a>
+        <a href="#" class="nav-item" onclick="goToPage('cours'); return false;">
+            <span class="icon">📚</span>
+            <span class="label">Cours</span>
+        </a>
+        <a href="#" class="nav-item" onclick="goToPage('profil'); return false;">
+            <span class="icon">👤</span>
+            <span class="label">Profil</span>
+        </a>
     </nav>
 
-    <!-- HERO -->
-    <div class="hero">
-        <h1>Bienvenue à <span>Tchatchibara School</span></h1>
-        <p>Tous les cours de la 1ère à la Terminale, accessibles gratuitement. Téléchargez vos PDF et réussissez brillamment !</p>
-        <div class="search-box">
-            <input type="text" placeholder="Rechercher un cours..." onkeyup="rechercher(this.value)">
-            <button onclick="document.querySelector('.search-box input').focus()">🔍</button>
-        </div>
-    </div>
-
-    <!-- COURS POPULAIRES -->
-    <section>
-        <h2 class="section-title">Cours populaires</h2>
-        <div class="cours-grid" id="coursPopulaires"></div>
-        <div style="text-align:center; margin-top:40px;">
-            <a href="cours.html" class="btn-principal">Voir tous les cours →</a>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        &copy; 2025 <span>Tchatchibara School</span> — Tous droits réservés.
-    </footer>
-
     <script src="script.js"></script>
-    <script>
-        // Afficher 3 cours populaires sur la page d'accueil
-        document.addEventListener("DOMContentLoaded", () => {
-            const pop = coursData.slice(0, 3);
-            const grid = document.getElementById("coursPopulaires");
-            pop.forEach(c => {
-                grid.innerHTML += `
-                    <div class="carte-cours">
-                        <div class="matiere">${c.matiere}</div>
-                        <h3>${c.titre}</h3>
-                        <span class="niveau-tag">${c.niveau}</span>
-                        <p>${c.desc}</p>
-                        <a class="btn-pdf" onclick="telechargerPDF('${c.pdf}', '${c.titre}')">📥 Télécharger le PDF</a>
-                    </div>`;
-            });
-        });
-    </script>
 </body>
 </html>
