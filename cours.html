@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cours - Tchatchibara School</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">Tchatchibara <span>School</span></div>
+        <div class="nav-links">
+            <a href="index.html">🏠 Accueil</a>
+            <a href="cours.html" class="active">📚 Cours</a>
+            <a href="profil.html">👤 Profil</a>
+            <a href="compte.html" class="btn-compte">Créer un compte</a>
+        </div>
+    </nav>
+
+    <section style="padding-top: 40px;">
+        <h2 class="section-title">Tous les Cours</h2>
+
+        <!-- Filtres -->
+        <div class="niveaux">
+            <button class="niveau-btn active" onclick="filtrerNiveau('tous', this)">Tous</button>
+            <button class="niveau-btn" onclick="filtrerNiveau('1ère', this)">1ère</button>
+            <button class="niveau-btn" onclick="filtrerNiveau('Terminale', this)">Terminale</button>
+        </div>
+
+        <div class="search-box" style="max-width:600px; margin:0 auto 40px;">
+            <input type="text" id="searchInput" placeholder="Rechercher un cours, une matière..." onkeyup="rechercher(this.value)">
+            <button>🔍</button>
+        </div>
+
+        <div class="cours-grid" id="coursGrid"></div>
+    </section>
+
+    <footer>
+        &copy; 2025 <span>Tchatchibara School</span> — Tous droits réservés.
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => afficherCours());
+    </script>
+</body>
+</html>
