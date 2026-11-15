@@ -149,3 +149,95 @@ document.addEventListener("DOMContentLoaded", () => {
     afficherCours();
     mettreAJourProfil();
 });
+
+/* ================= LOGIQUE DU CHAT (COMMUNAUTÉ) ================= */
+function chargerMessages() {
+    const chatMessages = document.getElementById("chatMessages");
+    if (!chatMessages) return;
+    
+    let messages = JSON.parse(localStorage.getItem("tchatchibara_chat") || "[]");
+    
+    // Si vide, on met un message de bienvenue
+    if (messages.length === 0) {
+        messages = [
+            { auteur: "Système", texte: "Bienvenue dans l'espace de discussion des élèves ! Soyez respectueux. 🤝", type: "autre" }
+        ];
+        localStorage.setItem("tchatchibara_chat", JSON.stringify(messages));
+    }
+
+    chatMessages.innerHTML = "";
+    messages.forEach(msg => {
+        chatMessages.innerHTML += `
+            <div class="message-bulle ${msg.type}">
+                <div class="message-auteur">${msg.auteur}</div>
+                ${msg.texte}
+            </div>`;
+    });
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function envoyerMessage(event) {
+    if (event && event.key !== 'Enter') return;
+    
+    const input = document.getElementById("chatInput");
+    const texte = input.value.trim();
+    if (!texte) return;
+
+    // Récupérer le nom de l'utilisateur ou mettre "Anonyme"
+    const user = JSON.parse(localStorage.getItem("tchatchibara_user") || "null");
+    const auteur = user ? user.nom : "Anonyme";
+    
+    let messages = JSON.parse(localStorage.getItem("tchatchibara_chat") || "[]");
+    
+    messages.push({ auteur: auteur, texte: texte, type: "moi" });
+    localStorage.setItem("tchatchibara_chat", JSON.stringify(messages));
+    
+    input.value = "";
+    chargerMessages();
+}
+
+/* ================= LOGIQUE DES COMMENTAIRES ================= */
+function chargerCommentaires() {
+    const liste = document.getElementById("listeCommentaires");
+    if (!liste) return;
+    
+    let commentaires = JSON.parse(localStorage.getItem("tchatchibara_comms") || "[]");
+    
+    if (commentaires.length === 0) {
+        liste.innerHTML = "<p style='text-align:center; color:#9fb4d4; padding:20px;'>Aucun commentaire pour le moment. Sois le premier ! ✨</p>";
+        return;
+    }
+
+    liste.innerHTML = "";
+    // On affiche du plus récent au plus ancien
+    [...commentaires].reverse().forEach(c => {
+        liste.innerHTML += `
+            <div class="commentaire-item">
+                <div class="commentaire-header">
+                    <span class="commentaire-auteur">${c.nom}</span>
+                    <span class="commentaire-date">${c.date}</span>
+                </div>
+                <div class="commentaire-texte">${c.texte}</div>
+            </div>`;
+    });
+}
+
+function ajouterCommentaire(event) {
+    event.preventDefault();
+    const nom = document.getElementById("comNom").value.trim();
+    const texte = document.getElementById("comTexte").value.trim();
+    
+    if (!nom || !texte) return;
+
+    const date = new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
+    
+    let commentaires = JSON.parse(localStorage.getItem("tchatchibara_comms") || "[]");
+    commentaires.push({ nom, texte, date });
+    localStorage.setItem("tchatchibara_comms", JSON.stringify(commentaires));
+    
+    document.getElementById("comNom").value = "";
+    document.getElementById("comTexte").value = "";
+    
+    chargerCommentaires();
+    alert("✅ Ton commentaire a été publié !");
+}
