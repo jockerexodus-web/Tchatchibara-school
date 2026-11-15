@@ -10,15 +10,12 @@
 </head>
 <body>
 
-    <!-- CONTENU PRINCIPAL -->
     <main id="app">
-
-        <!-- PAGE ACCUEIL -->
+        <!-- ================= PAGE ACCUEIL ================= -->
         <div id="page-accueil" class="page active">
             <header class="app-header">
                 <div class="tabs-top">
                     <span class="tab active">Accueil</span>
-                    <span class="tab" onclick="goToPage('cours')">Cours</span>
                 </div>
             </header>
 
@@ -43,7 +40,7 @@
             </div>
         </div>
 
-        <!-- PAGE COURS -->
+        <!-- ================= PAGE COURS ================= -->
         <div id="page-cours" class="page">
             <header class="app-header">
                 <h2 class="header-title">📚 Les Cours</h2>
@@ -59,7 +56,46 @@
             <div class="cours-grid-app" id="coursGrid"></div>
         </div>
 
-        <!-- PAGE PROFIL -->
+        <!-- ================= PAGE COMMUNAUTÉ (CHAT) ================= -->
+        <div id="page-communaute" class="page">
+            <header class="app-header">
+                <h2 class="header-title">💬 Espace Élèves</h2>
+            </header>
+            
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Les messages s'afficheront ici -->
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="chatInput" placeholder="Écris un message..." onkeypress="envoyerMessage(event)">
+                    <button onclick="envoyerMessage()">➤</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE COMMENTAIRES ================= -->
+        <div id="page-commentaires" class="page">
+            <header class="app-header">
+                <h2 class="header-title">⭐ Avis & Commentaires</h2>
+            </header>
+
+            <div class="commentaires-container">
+                <div class="form-card-app" style="margin-bottom: 20px;">
+                    <h3>Laisser un commentaire</h3>
+                    <form onsubmit="ajouterCommentaire(event)">
+                        <input type="text" id="comNom" placeholder="Ton nom ou pseudo" required>
+                        <textarea id="comTexte" placeholder="Qu'as-tu pensé de la plateforme ?" required style="width: 100%; padding: 14px 16px; margin-bottom: 12px; border: 2px solid rgba(255,255,255,0.2); border-radius: 10px; background: rgba(255,255,255,0.95); font-size: 15px; outline: none; font-family: inherit; resize: vertical; min-height: 80px;"></textarea>
+                        <button type="submit">Publier</button>
+                    </form>
+                </div>
+
+                <div id="listeCommentaires">
+                    <!-- Les commentaires s'afficheront ici -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PAGE PROFIL ================= -->
         <div id="page-profil" class="page">
             <header class="app-header">
                 <h2 class="header-title">👤 Mon Profil</h2>
@@ -90,10 +126,9 @@
                 </a>
             </div>
         </div>
-
     </main>
 
-    <!-- BOTTOM NAVIGATION BAR -->
+    <!-- ================= BOTTOM NAVIGATION (5 ONGLETS) ================= -->
     <nav class="bottom-nav">
         <a href="#" class="nav-item active" onclick="goToPage('accueil'); return false;">
             <span class="icon">🏠</span>
@@ -102,6 +137,14 @@
         <a href="#" class="nav-item" onclick="goToPage('cours'); return false;">
             <span class="icon">📚</span>
             <span class="label">Cours</span>
+        </a>
+        <a href="#" class="nav-item" onclick="goToPage('communaute'); return false;">
+            <span class="icon">💬</span>
+            <span class="label">Chat</span>
+        </a>
+        <a href="#" class="nav-item" onclick="goToPage('commentaires'); return false;">
+            <span class="icon">⭐</span>
+            <span class="label">Avis</span>
         </a>
         <a href="#" class="nav-item" onclick="goToPage('profil'); return false;">
             <span class="icon">👤</span>
