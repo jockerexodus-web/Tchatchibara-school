@@ -117,7 +117,33 @@ function mettreAJourProfil() {
     document.getElementById("statCours").textContent = stats.coursConsultes;
     document.getElementById("statPdf").textContent = stats.pdfTelecharges;
 }
+function goToPage(page, niveau = null) {
+    document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+    const pageEl = document.getElementById("page-" + page);
+    if (pageEl) pageEl.classList.add("active");
 
+    // Mettre à jour la bottom nav (5 onglets)
+    document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+    const navItems = document.querySelectorAll(".nav-item");
+    if (page === "accueil") navItems[0].classList.add("active");
+    if (page === "cours") navItems[1].classList.add("active");
+    if (page === "communaute") navItems[2].classList.add("active");
+    if (page === "commentaires") navItems[3].classList.add("active");
+    if (page === "profil") navItems[4].classList.add("active");
+
+    if (page === "cours") {
+        if (niveau) {
+            filtreNiveauActif = niveau;
+            document.querySelectorAll(".btn-niveau").forEach(b => b.classList.remove("active-niv"));
+        }
+        afficherCours();
+    }
+    if (page === "profil") mettreAJourProfil();
+    if (page === "communaute") chargerMessages();
+    if (page === "commentaires") chargerCommentaires();
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
 /* ================= INIT ================= */
 document.addEventListener("DOMContentLoaded", () => {
     afficherCours();
