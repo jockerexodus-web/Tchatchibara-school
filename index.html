@@ -1,827 +1,554 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Premier B3 - Cours complets de mathématiques</title>
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',Roboto,system-ui,sans-serif; }
-  body { background:#f8faff; color:#1e2b3a; line-height:1.65; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premier B3 - Cours de Maths</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-  header {
-    background:linear-gradient(135deg,#0b2d4b,#1b4f72);
-    color:#fff; padding:1.2rem 2rem;
-    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
-    box-shadow:0 6px 12px rgba(0,0,0,.1); position:sticky; top:0; z-index:100;
-  }
-  .logo { font-size:2rem; font-weight:800; letter-spacing:1px; }
-  .logo span { color:#f1c40f; font-size:2.2rem; }
-  nav { display:flex; gap:1.2rem; flex-wrap:wrap; }
-  nav a { color:#fff; text-decoration:none; font-weight:500; padding:.4rem .8rem; border-radius:20px; transition:background .2s; }
-  nav a:hover { background:rgba(255,255,255,.2); }
+        body {
+            background: #f5f7fa;
+            color: #1e2a3a;
+            line-height: 1.6;
+        }
 
-  .container { max-width:1200px; margin:0 auto; padding:2rem 1.5rem; }
+        header {
+            background: linear-gradient(135deg, #0b2b4f, #1b4f8a);
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
 
-  h1 { font-size:2.6rem; margin-bottom:1rem; color:#0b2d4b; font-weight:800; }
-  h2 { font-size:1.9rem; margin:2.5rem 0 1.5rem; color:#1b4f72; border-left:8px solid #f1c40f; padding-left:1.2rem; font-weight:700; }
-  h3 { font-size:1.4rem; margin:1.8rem 0 .8rem; color:#0b2d4b; font-weight:700; }
-  h4 { font-size:1.15rem; margin:1.2rem 0 .5rem; color:#1b4f72; }
+        header h1 {
+            font-size: 2.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
 
-  .hero {
-    background:#fff; border-radius:36px; padding:2.5rem;
-    box-shadow:0 20px 30px -10px rgba(0,20,40,.15);
-    display:flex; flex-wrap:wrap; gap:2rem; align-items:center;
-  }
-  .hero-text { flex:2; min-width:300px; }
-  .hero-text p { font-size:1.15rem; margin-bottom:1rem; color:#2c3e50; }
-  .hero-img {
-    flex:1; min-width:160px; width:180px; height:180px; font-size:5rem;
-    display:flex; align-items:center; justify-content:center;
-    background:linear-gradient(145deg,#d4e6f1,#ebf5fb);
-    border-radius:50%; margin:0 auto;
-    box-shadow:0 15px 20px rgba(0,0,0,.05);
-  }
+        header h1 span {
+            color: #ffd966;
+        }
 
-  /* Chapitres dépliables */
-  .chapitre {
-    background:#fff; border-radius:20px; margin-bottom:1.2rem;
-    box-shadow:0 6px 16px rgba(0,0,0,.04);
-    border:1px solid #e9eef4; overflow:hidden;
-  }
-  .chapitre summary {
-    padding:1.3rem 1.8rem; font-size:1.25rem; font-weight:700;
-    color:#0b2d4b; cursor:pointer; list-style:none;
-    display:flex; justify-content:space-between; align-items:center;
-    background:linear-gradient(90deg,#f4f9ff,#fff); transition:background .2s;
-  }
-  .chapitre summary:hover { background:#e8f2fc; }
-  .chapitre summary::-webkit-details-marker { display:none; }
-  .chapitre summary::after { content:"➕"; font-size:1.2rem; color:#1b4f72; transition:transform .3s; }
-  .chapitre[open] summary::after { content:"➖"; }
-  .chapitre[open] summary { border-bottom:2px solid #f1c40f; }
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
 
-  .chapitre-contenu { padding:1.5rem 2rem 2rem; }
+        nav {
+            background: #1e3a5f;
+            padding: 0.8rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
 
-  .definition, .propriete, .exemple, .methode, .remarque {
-    border-radius:14px; padding:1rem 1.4rem; margin:1rem 0;
-    border-left:6px solid;
-  }
-  .definition { background:#eef6ff; border-color:#2e86c1; }
-  .propriete  { background:#f0fbf4; border-color:#27ae60; }
-  .exemple    { background:#fffbea; border-color:#f39c12; }
-  .methode    { background:#f5eeff; border-color:#8e44ad; }
-  .remarque   { background:#fdf2f2; border-color:#e74c3c; }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            transition: background 0.2s;
+        }
 
-  .definition strong, .propriete strong, .exemple strong,
-  .methode strong, .remarque strong { display:block; margin-bottom:.4rem; font-size:.95rem; text-transform:uppercase; letter-spacing:.5px; }
+        nav a:hover {
+            background: #ffd966;
+            color: #0b2b4f;
+        }
 
-  .formule {
-    background:#0b2d4b; color:#f1c40f; padding:1rem 1.4rem;
-    border-radius:12px; font-family:'Courier New',monospace;
-    font-size:1.1rem; text-align:center; margin:1rem 0; overflow-x:auto;
-  }
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
 
-  table { width:100%; border-collapse:collapse; margin:1rem 0; font-size:.95rem; }
-  th, td { border:1px solid #ccdae5; padding:.6rem .8rem; text-align:left; }
-  th { background:#e8f2fc; color:#0b2d4b; }
-  tr:nth-child(even) td { background:#fafcff; }
+        .intro {
+            background: white;
+            padding: 1.8rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 2.5rem;
+            border-left: 6px solid #ffd966;
+        }
 
-  ul.liste { margin:.8rem 0 1rem 1.6rem; }
-  ul.liste li { margin-bottom:.4rem; }
+        .intro h2 {
+            color: #0b2b4f;
+            margin-bottom: 1rem;
+        }
 
-  .btn {
-    display:inline-block; background:#1b4f72; color:#fff;
-    padding:.7rem 1.4rem; border-radius:40px; text-decoration:none;
-    font-weight:600; margin:.4rem .3rem; transition:background .2s; border:none; cursor:pointer;
-  }
-  .btn:hover { background:#0b2d4b; }
+        .chapitre {
+            background: white;
+            border-radius: 18px;
+            margin-bottom: 2rem;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
 
-  .grid-chap { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1rem; margin:1.5rem 0; }
-  .carte-nav {
-    background:#fff; border-radius:16px; padding:1.2rem;
-    border:1px solid #e9eef4; text-align:center; font-weight:600; color:#1b4f72;
-    text-decoration:none; transition:transform .2s, box-shadow .2s;
-  }
-  .carte-nav:hover { transform:translateY(-4px); box-shadow:0 10px 20px rgba(27,79,114,.12); }
+        .chapitre h3 {
+            background: #1e3a5f;
+            color: white;
+            padding: 1rem 1.8rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
 
-  footer {
-    background:#0b2d4b; color:#aac7df; text-align:center;
-    padding:2rem; margin-top:3rem; border-top:4px solid #f1c40f;
-  }
-  footer strong { color:#f1c40f; }
+        .chapitre h3 i {
+            font-style: normal;
+            background: #ffd966;
+            color: #0b2b4f;
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: 700;
+        }
 
-  @media(max-width:700px){
-    header { flex-direction:column; gap:1rem; text-align:center; }
-    h1 { font-size:2rem; }
-    h2 { font-size:1.5rem; }
-    .chapitre-contenu { padding:1rem 1.2rem; }
-    .chapitre summary { padding:1rem 1.2rem; font-size:1.1rem; }
-  }
-</style>
+        .contenu {
+            padding: 1.8rem;
+        }
+
+        .cours h4 {
+            color: #1e3a5f;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+            border-bottom: 2px solid #ffd966;
+            padding-bottom: 0.3rem;
+            display: inline-block;
+        }
+
+        .cours p, .cours ul, .cours ol {
+            margin-bottom: 1rem;
+        }
+
+        .cours ul, .cours ol {
+            padding-left: 2rem;
+        }
+
+        .cours li {
+            margin-bottom: 0.4rem;
+        }
+
+        .formule {
+            background: #eef3fc;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            border-left: 5px solid #1e3a5f;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            font-size: 1.05rem;
+            overflow-x: auto;
+        }
+
+        .exercice {
+            background: #f9fbfe;
+            border: 2px solid #dce5f0;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .exercice h5 {
+            color: #0b2b4f;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .exercice .enonce {
+            background: #fff;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid #cbd6e6;
+            margin-bottom: 1rem;
+        }
+
+        .corrige {
+            background: #e8f5e9;
+            border-left: 5px solid #2e7d32;
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+        }
+
+        .corrige strong {
+            color: #1b5e20;
+        }
+
+        .contact {
+            background: #0b2b4f;
+            color: white;
+            padding: 2.5rem 1.5rem;
+            border-radius: 24px;
+            margin: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .contact-item {
+            background: #1e3a5f;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.1rem;
+            transition: transform 0.2s;
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-item:hover {
+            transform: scale(1.03);
+            background: #2a4d7a;
+        }
+
+        footer {
+            background: #0b2b4f;
+            color: #cfdff0;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 1rem;
+            border-top: 4px solid #ffd966;
+            margin-top: 2rem;
+        }
+
+        footer strong {
+            color: #ffd966;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            .chapitre h3 { font-size: 1.2rem; }
+            .contact-info { flex-direction: column; align-items: center; }
+        }
+    </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">Premier <span>B3</span></div>
-  <nav>
-    <a href="#accueil">Accueil</a>
-    <a href="#programme">Programme</a>
-    <a href="#cours">Cours</a>
-    <a href="#contact">Contact</a>
-  </nav>
+    <h1>Premier <span>B3</span></h1>
+    <p>Apprendre les Maths de Première B — de A à Z</p>
 </header>
 
-<main class="container">
+<nav>
+    <a href="#ch1">1. Second degré</a>
+    <a href="#ch2">2. Suites</a>
+    <a href="#ch3">3. Dérivation</a>
+    <a href="#ch4">4. Statistiques</a>
+    <a href="#ch5">5. Probabilités</a>
+    <a href="#contact">Contact</a>
+</nav>
 
-  <!-- ACCUEIL -->
-  <section id="accueil">
-    <div class="hero">
-      <div class="hero-text">
-        <h1>Premier B3</h1>
-        <p><strong>Premier B3</strong> est une plateforme éducative dédiée à l'apprentissage des mathématiques en classe de Première B.</p>
-        <p>Notre objectif : rendre chaque notion claire, illustrée et accessible. Vous trouverez ici <strong>l'intégralité du programme de mathématiques de Première B</strong> : cours détaillés, définitions, propriétés, formules, méthodes et exemples résolus.</p>
-        <p>📘 Que vous prépariez un contrôle, le bac ou souhaitiez simplement consolider vos bases, tout est expliqué pas à pas.</p>
-      </div>
-      <div class="hero-img">📐</div>
+<div class="container">
+
+    <div class="intro">
+        <h2>Bienvenue sur Premier B3</h2>
+        <p>Ce site regroupe <strong>tous les cours de mathématiques de Première B</strong>, détaillés de A à Z, avec des exercices corrigés pour chaque chapitre. Idéal pour réviser, comprendre et progresser à ton rythme.</p>
     </div>
-  </section>
 
-  <!-- PROGRAMME / SOMMAIRE -->
-  <section id="programme">
-    <h2>🗂️ Programme complet de Première B</h2>
-    <div class="grid-chap">
-      <a href="#chap1" class="carte-nav">1. Second degré</a>
-      <a href="#chap2" class="carte-nav">2. Fonctions & dérivation</a>
-      <a href="#chap3" class="carte-nav">3. Suites numériques</a>
-      <a href="#chap4" class="carte-nav">4. Statistiques</a>
-      <a href="#chap5" class="carte-nav">5. Probabilités</a>
-      <a href="#chap6" class="carte-nav">6. Vecteurs & géométrie</a>
-      <a href="#chap7" class="carte-nav">7. Trigonométrie</a>
-      <a href="#chap8" class="carte-nav">8. Nombres & calculs</a>
-      <a href="#chap9" class="carte-nav">9. Algorithmique</a>
+    <!-- CHAPITRE 1 : SECOND DEGRÉ -->
+    <div class="chapitre" id="ch1">
+        <h3><i>1</i> Le Second Degré</h3>
+        <div class="contenu">
+            <div class="cours">
+                <h4>1.1 Définition</h4>
+                <p>Un polynôme du second degré est une expression de la forme :</p>
+                <div class="formule">f(x) = ax² + bx + c, avec a ≠ 0</div>
+                <p>où a, b et c sont des nombres réels appelés coefficients.</p>
+
+                <h4>1.2 Forme canonique</h4>
+                <p>Tout trinôme du second degré peut s'écrire sous forme canonique :</p>
+                <div class="formule">f(x) = a(x − α)² + β, avec α = −b/(2a) et β = f(α)</div>
+                <p>Le point S(α ; β) est le sommet de la parabole.</p>
+
+                <h4>1.3 Discriminant et racines</h4>
+                <p>On appelle discriminant le nombre :</p>
+                <div class="formule">Δ = b² − 4ac</div>
+                <ul>
+                    <li>Si Δ &gt; 0 : deux racines distinctes x₁ = (−b − √Δ)/(2a) et x₂ = (−b + √Δ)/(2a)</li>
+                    <li>Si Δ = 0 : une racine double x₀ = −b/(2a)</li>
+                    <li>Si Δ &lt; 0 : aucune racine réelle</li>
+                </ul>
+
+                <h4>1.4 Signe du trinôme</h4>
+                <p>Le signe de f(x) dépend de a et des racines :</p>
+                <ul>
+                    <li>Si Δ &gt; 0 : f(x) est du signe de a à l'extérieur des racines, et de signe opposé à l'intérieur.</li>
+                    <li>Si Δ = 0 : f(x) est du signe de a partout sauf en x₀ où il s'annule.</li>
+                    <li>Si Δ &lt; 0 : f(x) est du signe de a sur tout ℝ.</li>
+                </ul>
+
+                <h4>1.5 Factorisation</h4>
+                <div class="formule">Si Δ &gt; 0 : f(x) = a(x − x₁)(x − x₂)<br>Si Δ = 0 : f(x) = a(x − x₀)²</div>
+            </div>
+
+            <div class="exercice">
+                <h5>📝 Exercice corrigé 1</h5>
+                <div class="enonce">
+                    <p>Résoudre l'équation : <strong>2x² − 5x + 3 = 0</strong></p>
+                </div>
+                <div class="corrige">
+                    <p><strong>Corrigé :</strong></p>
+                    <p>a = 2, b = −5, c = 3.</p>
+                    <p>Δ = b² − 4ac = (−5)² − 4×2×3 = 25 − 24 = 1.</p>
+                    <p>Δ &gt; 0, donc deux racines :</p>
+                    <p>x₁ = (5 − 1)/(2×2) = 4/4 = 1</p>
+                    <p>x₂ = (5 + 1)/4 = 6/4 = 3/2</p>
+                    <p><strong>Solution : S = {1 ; 3/2}</strong></p>
+                </div>
+            </div>
+
+            <div class="exercice">
+                <h5>📝 Exercice corrigé 2</h5>
+                <div class="enonce">
+                    <p>Étudier le signe de <strong>f(x) = −x² + 4x − 3</strong>.</p>
+                </div>
+                <div class="corrige">
+                    <p><strong>Corrigé :</strong></p>
+                    <p>Δ = 16 − 12 = 4 &gt; 0. Racines : x₁ = ( −4 + 2 )/(−2) = 1 et x₂ = ( −4 − 2 )/(−2) = 3.</p>
+                    <p>a = −1 &lt; 0. Donc f(x) &lt; 0 à l'extérieur de [1 ; 3] et f(x) &gt; 0 sur ]1 ; 3[.</p>
+                    <p><strong>Tableau de signes : f(x) &gt; 0 pour x ∈ ]1 ; 3[, f(x) &lt; 0 pour x ∈ ]−∞ ; 1[ ∪ ]3 ; +∞[.</strong></p>
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
 
-  <!-- COURS DÉTAILLÉS -->
-  <section id="cours">
-    <h2>📚 Cours détaillés</h2>
-
-    <!-- CHAPITRE 1 -->
-    <details class="chapitre" id="chap1">
-      <summary>Chapitre 1 — Le second degré</summary>
-      <div class="chapitre-contenu">
-
-        <h3>1. Définition d'un polynôme du second degré</h3>
-        <div class="definition">
-          <strong>Définition</strong>
-          Un <strong>polynôme du second degré</strong> (ou trinôme) est une fonction de la forme :
-          <div class="formule">f(x) = ax² + bx + c, avec a ≠ 0</div>
-          où a, b et c sont des nombres réels appelés coefficients.
-        </div>
-
-        <h3>2. Forme canonique</h3>
-        <div class="propriete">
-          <strong>Propriété</strong>
-          Tout trinôme ax² + bx + c peut s'écrire sous sa <strong>forme canonique</strong> :
-          <div class="formule">f(x) = a(x − α)² + β</div>
-          avec α = −b/(2a) et β = f(α). Cette forme permet d'identifier le sommet S(α ; β) de la parabole.
-        </div>
-
-        <h3>3. Discriminant et résolution de ax² + bx + c = 0</h3>
-        <div class="definition">
-          <strong>Définition</strong>
-          On appelle <strong>discriminant</strong> le réel :
-          <div class="formule">Δ = b² − 4ac</div>
-        </div>
-        <div class="propriete">
-          <strong>Résolution selon le signe de Δ</strong>
-          <ul class="liste">
-            <li>Si <strong>Δ > 0</strong> : deux solutions réelles distinctes x₁ = (−b − √Δ)/(2a) et x₂ = (−b + √Δ)/(2a).</li>
-            <li>Si <strong>Δ = 0</strong> : une solution double x₀ = −b/(2a).</li>
-            <li>Si <strong>Δ < 0</strong> : aucune solution réelle.</li>
-          </ul>
-        </div>
-
-        <h3>4. Factorisation</h3>
-        <div class="propriete">
-          <strong>Propriété</strong>
-          Si Δ ≥ 0, on peut factoriser :
-          <div class="formule">ax² + bx + c = a(x − x₁)(x − x₂)</div>
-          (avec x₁ = x₂ si Δ = 0).
-        </div>
-
-        <h3>5. Signe du trinôme</h3>
-        <div class="propriete">
-          <strong>Règle du signe</strong>
-          <ul class="liste">
-            <li>Si Δ > 0 : le trinôme est du signe de <em>a</em> à l'extérieur des racines, et du signe de <em>−a</em> entre les racines.</li>
-            <li>Si Δ = 0 : le trinôme est du signe de <em>a</em> partout sauf en x₀ où il s'annule.</li>
-            <li>Si Δ < 0 : le trinôme est du signe de <em>a</em> sur ℝ tout entier.</li>
-          </ul>
-        </div>
-
-        <h3>6. Somme et produit des racines</h3>
-        <div class="propriete">
-          <strong>Propriété</strong>
-          Si x₁ et x₂ sont les racines de ax² + bx + c = 0 :
-          <div class="formule">x₁ + x₂ = −b/a  et  x₁ × x₂ = c/a</div>
-        </div>
-
-        <h3>7. Représentation graphique</h3>
-        <div class="remarque">
-          <strong>Remarque</strong>
-          La courbe est une <strong>parabole</strong> de sommet S(α ; β).
-          <ul class="liste">
-            <li>Si a > 0 : parabole tournée vers le haut (minimum en S).</li>
-            <li>Si a < 0 : parabole tournée vers le bas (maximum en S).</li>
-          </ul>
-        </div>
-
-        <div class="exemple">
-          <strong>Exemple résolu</strong>
-          Résoudre 2x² − 7x + 3 = 0.<br>
-          Δ = (−7)² − 4×2×3 = 49 − 24 = 25 > 0.<br>
-          √Δ = 5. Donc x₁ = (7 − 5)/4 = 1/2 et x₂ = (7 + 5)/4 = 3.<br>
-          Solutions : S = {1/2 ; 3}.
-        </div>
-
-        <div class="methode">
-          <strong>Méthode — Équations se ramenant au second degré</strong>
-          Pour résoudre une équation avec des fractions ou des racines, on se ramène à ax² + bx + c = 0 en multipliant par le dénominateur (en vérifiant les valeurs interdites), puis on applique la méthode ci-dessus.
-        </div>
-
-      </div>
-    </details>
-
-    <!-- CHAPITRE 2 -->
-    <details class="chapitre" id="chap2">
-      <summary>Chapitre 2 — Fonctions et dérivation</summary>
-      <div class="chapitre-contenu">
-
-        <h3>1. Généralités sur les fonctions</h3>
-        <div class="definition">
-          <strong>Définition</strong>
-          Une <strong>fonction</strong> f associe à chaque réel x d'un ensemble D (domaine de définition) un unique réel f(x). On note f : D → ℝ.
-        </div>
-        <div class="definition">
-          <strong>Sens de variation</strong>
-          <ul class="liste">
-            <li>f est <strong>croissante</strong> sur I si pour tous a, b de I avec a < b, on a f(a) ≤ f(b).</li>
-            <li>f est <strong>décroissante</strong> sur I si a < b ⟹ f(a) ≥ f(b).</li>
-          </ul>
-        </div>
-
-        <h3>2. Nombre dérivé</h3>
-        <div class="definition">
-          <strong>Définition</strong>
-          Le <strong>nombre dérivé</strong> de f en a est la limite, si elle existe, du taux d'accroissement :
-          <div class="formule">f′(a) = lim<sub>h→0</sub> [f(a+h) − f(a)] / h</div>
-          Il correspond au coefficient directeur de la tangente à la courbe au point d'abscisse a.
-        </div>
-
-        <h3>3. Fonction dérivée — formules usuelles</h3>
-        <table>
-          <tr><th>Fonction f(x)</th><th>Dérivée f′(x)</th></tr>
-          <tr><td>k (constante)</td><td>0</td></tr>
-          <tr><td>x</td><td>1</td></tr>
-          <tr><td>x²</td><td>2x</td></tr>
-          <tr><td>xⁿ</td><td>n·xⁿ⁻¹</td></tr>
-          <tr><td>1/x</td><td>−1/x²</td></tr>
-          <tr><td>√x</td><td>1/(2√x)</td></tr>
-        </table>
-
-        <h3>4. Opérations sur les dérivées</h3>
-        <div class="propriete">
-          <strong>Propriétés</strong>
-          <ul class="liste">
-            <li>(u + v)′ = u′ + v′</li>
-            <li>(k·u)′ = k·u′</li>
-            <li>(u·v)′ = u′v + uv′</li>
-            <li>(u/v)′ = (u′v − uv′)/v²</li>
-          </ul>
-        </div>
-
-        <h3>5. Lien dérivée / variations</h3>
-        <div class="propriete">
-          <strong>Théorème fondamental</strong>
-          <ul class="liste">
-            <li>Si f′ > 0 sur I, alors f est strictement croissante sur I.</li>
-            <li>Si f′ < 0 sur I, alors f est strictement décroissante sur I.</li>
-            <li>Si f′ = 0 sur I, alors f est constante sur I.</li>
-          </ul>
-          Un changement de signe de f′ en un point a indique un extremum local.
-        </div>
-
-        <h3>6. Équation de la tangente</h3>
-        <div class="propriete">
-          <strong>Propriété</strong>
-          La tangente à la courbe de f au point d'abscisse a a pour équation :
-          <div class="formule">y = f′(a)(x − a) + f(a)</div>
-        </div>
-
-        <div class="exemple">
-          <strong>Exemple résolu</strong>
-          Soit f(x) = x³ − 3x. f′(x) = 3x² − 3 = 3(x² − 1).<br>
-          f′ > 0 sur ]−∞ ; −1[ ∪ ]1 ; +∞[, f′ < 0 sur ]−1 ; 1[.<br>
-          Donc f est croissante puis décroissante puis croissante : maximum local en x = −1 (f(−1) = 2), minimum local en x = 1 (f(1) = −2).
-        </div>
-
-        <div class="methode">
-          <strong>Méthode — Étude complète d'une fonction</strong>
-          <ol style="margin-left:1.6rem">
-            <li>Déterminer le domaine de définition.</li>
-            <li>Calculer la dérivée f′.</li>
-            <li>Étudier le signe de f′.</li>
-            <li>Dresser le tableau de variations.</li>
-            <li>Calculer les valeurs remarquables et tracer la courbe.</li>
-          </ol>
-        </div>
-
-      </div>
-    </details>
-
-    <!-- CHAPITRE 3 -->
-    <details class="chapitre" id="chap3">
-      <summary>Chapitre 3 — Suites numériques</summary>
-      <div class="chapitre-contenu">
-
-        <h3>1. Définition</h3>
-        <div class="definition">
-          <strong>Définition</strong>
-          Une <strong>suite numérique</strong> (uₙ) est une fonction définie sur ℕ (ou une partie de ℕ) qui à chaque entier n associe un réel uₙ.
-        </div>
-
-        <h3>2. Suites arithmétiques</h3>
-        <div class="definition">
-          <strong>Définition</strong>
-          (uₙ) est <strong>arithmétique</strong> de raison r si pour tout n :
-          <div class="formule">uₙ₊₁ = uₙ + r</div>
-        </div>
-        <div class="propriete">
-          <strong>Propriétés</strong>
-          <ul class="liste">
-            <li>Terme général : uₙ = u₀ + n·r (ou uₙ = u_p + (n−p)·r).</li>
-            <li>Somme des n premiers termes : S = (nombre de termes) × (premier + dernier)/2.</li>
-          </ul>
-        </div>
-
-        <h3>3. Suites géométriques</h3>
-        <div class="definition">
-          <strong>Définition</strong>
-          (uₙ) est <strong>géométrique</strong> de raison q (q ≠ 0) si :
-          <div class="formule">uₙ₊₁ = q · uₙ</div>
-        </div>
-        <div class="propriete">
-          <strong>Propriétés</strong>
-          <ul class="liste">
-            <li>Terme général : uₙ = u₀ · qⁿ.</li>
-            <li>Somme des termes : S = u₀ × (1 − qⁿ⁺¹)/(1 − q) si q ≠ 1.</li>
-          </ul>
-        </div>
-
-        <h3>4. Sens de variation</h3>
-        <div class="propriete">
-          <strong>Propriétés</strong>
-          <ul class="liste">
-            <li>Arithmétique : croissante si r > 0, décroissante si r < 0, constante si r = 0.</li>
-            <li>Géométrique (u₀ > 0) : croissante si q > 1, décroissante si 0 < q < 1.</li>
-          </ul>
-        </div>
-
-        <h3>5. Comportement à l'infini</h3>
-        <div class="remarque">
-          <strong>Remarque</strong>
-          <ul class="liste">
-            <li>Si q > 1 : qⁿ → +∞.</li>
-            <li>Si 0 < q < 1 : qⁿ → 0.</li>
-            <li>Si −1 < q < 0 : qⁿ → 0 (alternée).</li>
-          </ul>
-        </div>
-
-        <div class="exemple">
-          <strong>Exemple résolu</strong>
-          (uₙ) arithmétique avec u₀ = 3 et r = 2 : uₙ = 3 + 2n. Somme des 10 premiers termes : S = 10 × (u₀ + u₉)/2 = 10 × (3 + 21)/2 = 120.
-        </div>
-
-      </div>
-    </details>
-
-    <!-- CHAPITRE 4 -->
-    <details class="chapitre" id="chap4">
-      <summary>Chapitre 4 — Statistiques descriptives</summary>
-      <div class="chapitre-contenu">
-
-        <h3>1. Vocabulaire</h3>
-        <div class="definition">
-          <strong>Définitions</strong>
-          <ul class="liste">
-            <li><strong>Population</strong> : ensemble étudié.</li>
-            <li><strong>Caractère</strong> : propriété étudiée (quantitatif ou qualitatif).</li>
-            <li><strong>Effectif</strong> : nombre d'individus d'une valeur.</li>
-            <li><strong>Fréquence</strong> : effectif / effectif total.</li>
-          </ul>
-        </div>
-
-        <h3>2. Indicateurs de position</h3>
-        <div class="propriete">
-          <strong>Propriétés</strong>
-          <ul class="liste">
-            <li><strong>Moyenne</strong> : x̄ = (Σ nᵢxᵢ) / N.</li>
-            <li><strong>Médiane</strong> : valeur qui sépare la série en deux parties égales.</li>
-            <li><strong>Quartiles</strong> : Q₁ (25 %), Q₂ = médiane, Q₃ (75 %).</li>
-          </ul>
-        </div>
-
-        <h3>3. Indicateurs de dispersion</h3>
-        <div class="propriete">
-          <strong>Propriétés</strong>
-          <ul class="liste">
-            <li><strong>Étendue</strong> = max − min.</li>
-            <li><strong>Écart interquartile</strong> = Q₃ − Q₁.</li>
-            <li><strong>Variance</strong> : V = (1/N) Σ nᵢ(xᵢ − x̄)².</li>
-            <li><strong>Écart-type</strong> : σ = √V.</li>
-          </ul>
-        </div>
-
-        <h3>4. Diagramme en boîte</h3>
-        <div class="remarque">
-          <strong>Remarque</strong>
-          Le diagramme en boîte (boîte à moustaches) représente min, Q₁, médiane, Q₃ et max. Il permet de comparer visuellement plusieurs séries.
-        </div>
-
-        <div class="exemple">
-          <strong>Exemple résolu</strong>
-          Série : 2, 4, 5, 7, 9, 10, 12.<br>
-          Moyenne = (2+4+5+7+9+10+12)/7 = 49/7 = 7.<br>
-          Médiane = 7 (4ᵉ valeur). Q₁ = 4, Q₃ = 10. Étendue = 12 − 2 = 10.
-        </div>
-
-      </div>
-    </details>
-
-    <!-- CHAPITRE 5 -->
-    <details class="chapitre" id="chap5">
-      <summary>Chapitre 5 — Probabilités</summary>
-      <div class="chapitre-contenu">
-
-        <h3>1. Vocabulaire</h3>
-        <div class="definition">
-          <strong>Définitions</strong>
-          <ul class="liste">
-            <li><strong>Expérience aléatoire</strong> : expérience dont on connaît les issues possibles mais pas le résultat.</li>
-            <li><strong>Univers Ω</strong> : ensemble des issues possibles.</li>
-            <li><strong>Événement</strong> : sous-ensemble de Ω.</li>
-          </ul>
-        </div>
-
-        <h3>2. Probabilité</h3>
-        <div class="definition">
-          <strong>Définition</strong>
-          Une <strong>probabilité</strong> P est une fonction qui à chaque événement A associe un réel P(A) ∈ [0 ; 1] tel que P(Ω) = 1 et, pour deux événements incompatibles A et B, P(A ∪ B) = P(A) + P(B).
-        </div>
-        <div class="propriete">
-          <strong>Propriétés</strong>
-          <ul class="liste">
-            <li>P(Ā) = 1 − P(A).</li>
-            <li>P(A ∪ B) = P(A) + P(B) − P(A ∩ B).</li>
-            <li>Équiprobabilité : P(A) = (nombre de cas favorables)/(nombre de cas possibles).</li>
-          </ul>
+    <!-- CHAPITRE 2 : SUITES -->
+    <div class="chapitre" id="ch2">
+        <h3><i>2</i> Les Suites Numériques</h3>
+        <div class="contenu">
+            <div class="cours">
+                <h4>2.1 Définition</h4>
+                <p>Une suite numérique est une fonction définie sur ℕ (ou une partie de ℕ) à valeurs dans ℝ. On note (uₙ).</p>
+
+                <h4>2.2 Suites arithmétiques</h4>
+                <p>Une suite est arithmétique de raison r si :</p>
+                <div class="formule">uₙ₊₁ = uₙ + r</div>
+                <p>Terme général :</p>
+                <div class="formule">uₙ = u₀ + n·r &nbsp; ou &nbsp; uₙ = u₁ + (n−1)·r</div>
+                <p>Somme des n premiers termes :</p>
+                <div class="formule">S = (nombre de termes) × (premier + dernier)/2</div>
+
+                <h4>2.3 Suites géométriques</h4>
+                <p>Une suite est géométrique de raison q (q ≠ 0) si :</p>
+                <div class="formule">uₙ₊₁ = q · uₙ</div>
+                <p>Terme général :</p>
+                <div class="formule">uₙ = u₀ · qⁿ</div>
+                <p>Somme des termes :</p>
+                <div class="formule">S = u₀ × (1 − qⁿ⁺¹)/(1 − q) si q ≠ 1</div>
+
+                <h4>2.4 Sens de variation</h4>
+                <ul>
+                    <li>Suite arithmétique : croissante si r &gt; 0, décroissante si r &lt; 0, constante si r = 0.</li>
+                    <li>Suite géométrique (u₀ &gt; 0) : croissante si q &gt; 1, décroissante si 0 &lt; q &lt; 1.</li>
+                </ul>
+            </div>
+
+            <div class="exercice">
+                <h5>📝 Exercice corrigé 1</h5>
+                <div class="enonce">
+                    <p>Soit (uₙ) la suite arithmétique de premier terme u₀ = 3 et de raison r = 5. Calculer u₁₀ et la somme S = u₀ + u₁ + ... + u₁₀.</p>
+                </div>
+                <div class="corrige">
+                    <p><strong>Corrigé :</strong></p>
+                    <p>u₁₀ = u₀ + 10r = 3 + 10×5 = 53.</p>
+                    <p>Nombre de termes : 11 (de u₀ à u₁₀).</p>
+                    <p>S = 11 × (3 + 53)/2 = 11 × 56/2 = 11 × 28 = <strong>308</strong>.</p>
+                </div>
+            </div>
+
+            <div class="exercice">
+                <h5>📝 Exercice corrigé 2</h5>
+                <div class="enonce">
+                    <p>Soit (vₙ) la suite géométrique de premier terme v₀ = 2 et de raison q = 3. Calculer v₅ et la somme des 6 premiers termes.</p>
+                </div>
+                <div class="corrige">
+                    <p><strong>Corrigé :</strong></p>
+                    <p>v₅ = v₀ × q⁵ = 2 × 3⁵ = 2 × 243 = 486.</p>
+                    <p>S = v₀ × (1 − q⁶)/(1 − q) = 2 × (1 − 729)/(1 − 3) = 2 × (−728)/(−2) = <strong>728</strong>.</p>
+                </div>
+            </div>
         </div>
-
-        <h3>3. Probabilités conditionnelles</h3>
-        <div class="definition">
-          <strong>Définition</strong>
-          La probabilité de A sachant B (avec P(B) ≠ 0) est :
-          <div class="formule">P(A|B) = P(A ∩ B) / P(B)</div>
-        </div>
-        <div class="propriete">
-          <strong>Formule des probabilités totales</strong>
-          Si B₁, B₂, …, Bₙ forment une partition de Ω :
-          <div class="formule">P(A) = Σ P(A|Bᵢ) · P(Bᵢ)</div>
-        </div>
-
-        <h3>4. Indépendance</h3>
-        <div class="definition">
-          <strong>Définition</strong>
-          A et B sont <strong>indépendants</strong> si P(A ∩ B) = P(A)·P(B), c'est-à-dire P(A|B) = P(A).
-        </div>
-
-        <h3>5. Variable aléatoire</h3>
-        <div class="definition">
-          <strong>Définition</strong>
-          Une <strong>variable aléatoire</strong> X associe un réel à chaque issue de Ω. On définit :
-          <ul class="liste">
-            <li>L'espérance : E(X) = Σ xᵢ·P(X = xᵢ).</li>
-            <li>La variance : V(X) = Σ (xᵢ − E(X))²·P(X = xᵢ) = E(X²) − [E(X)]².</li>
-            <li>L'écart-type : σ(X) = √V(X).</li>
-          </ul>
-        </div>
-
-        <div class="exemple">
-          <strong>Exemple résolu</strong>
-          On lance un dé équilibré. X = numéro obtenu.<br>
-          E(X) = (1+2+3+4+5+6)/6 = 3,5.<br>
-          V(X) = (1/6)[(1−3,5)² + … + (6−3,5)²] ≈ 2,92 ; σ(X) ≈ 1,71.
-        </div>
-
-      </div>
-    </details>
-
-    <!-- CHAPITRE 6 -->
-    <details class="chapitre" id="chap6">
-      <summary>Chapitre 6 — Vecteurs et géométrie repérée</summary>
-      <div class="chapitre-contenu">
-
-        <h3>1. Vecteurs du plan</h3>
-        <div class="definition">
-          <strong>Définition</strong>
-          Un <strong>vecteur</strong> AB→ est caractérisé par sa direction, son sens et sa norme (longueur). Deux vecteurs sont égaux s'ils ont même direction, même sens et même norme.
-        </div>
-        <div class="propriete">
-          <strong>Coordonnées</strong>
-          Si A(x_A ; y_A) et B(x_B ; y_B), alors :
-          <div class="formule">AB→ (x_B − x_A ; y_B − y_A)</div>
-        </div>
-
-        <h3>2. Opérations sur les vecteurs</h3>
-        <div class="propriete">
-          <strong>Propriétés</strong>
-          <ul class="liste">
-            <li>Somme : u→ + v→ (addition des coordonnées).</li>
-            <li>Multiplication par un réel k : k·u→ (coordonnées multipliées par k).</li>
-            <li>u→ et v→ sont colinéaires si v→ = k·u→ (déterminant nul : x·y′ − x′·y = 0).</li>
-          </ul>
-        </div>
-
-        <h3>3. Équations de droites</h3>
-        <div class="propriete">
-          <strong>Propriétés</strong>
-          <ul class="liste">
-            <li>Équation réduite : y = mx + p (m = coefficient directeur, p = ordonnée à l'origine).</li>
-            <li>Équation cartésienne : ax + by + c = 0.</li>
-            <li>Le vecteur directeur d'une droite d'équation ax + by + c = 0 est (−b ; a).</li>
-          </ul>
-        </div>
-
-        <h3>4. Produit scalaire (initiation)</h3>
-        <div class="definition">
-          <strong>Définition</strong>
-          Le <strong>produit scalaire</strong> de u→(x ; y) et v→(x′ ; y′) est :
-          <div class="formule">u→ · v→ = x·x′ + y·y′</div>
-          Deux vecteurs sont orthogonaux si leur produit scalaire est nul.
-        </div>
-
-        <div class="exemple">
-          <strong>Exemple résolu</strong>
-          Droite passant par A(1 ; 2) et B(4 ; 6).<br>
-          Vecteur AB→ (3 ; 4). Coefficient directeur m = 4/3.<br>
-          Équation : y = (4/3)x + p. Avec A : 2 = (4/3)(1) + p ⟹ p = 2/3.<br>
-          Donc y = (4/3)x + 2/3, soit 4x − 3y + 2 = 0.
-        </div>
-
-      </div>
-    </details>
-
-    <!-- CHAPITRE 7 -->
-    <details class="chapitre" id="chap7">
-      <summary>Chapitre 7 — Trigonométrie</summary>
-      <div class="chapitre-contenu">
-
-        <h3>1. Cercle trigonométrique</h3>
-        <div class="definition">
-          <strong>Définition</strong>
-          Le <strong>cercle trigonométrique</strong> est le cercle de centre O et de rayon 1, orienté dans le sens direct (sens inverse des aiguilles d'une montre).
-        </div>
-
-        <h3>2. Radians et degrés</h3>
-        <div class="propriete">
-          <strong>Conversion</strong>
-          <div class="formule">180° = π radians</div>
-          Donc 1 rad ≈ 57,3° et 1° ≈ π/180 rad.
-        </div>
-
-        <h3>3. Cosinus et sinus</h3>
-        <div class="definition">
-          <strong>Définition</strong>
-          Pour un point M du cercle trigonométrique associé à l'angle α, on a :
-          <div class="formule">M(cos α ; sin α)</div>
-          avec cos²α + sin²α = 1.
-        </div>
-
-        <h3>4. Valeurs remarquables</h3>
-        <table>
-          <tr><th>α</th><th>0</th><th>π/6</th><th>π/4</th><th>π/3</th><th>π/2</th></tr>
-          <tr><td>cos α</td><td>1</td><td>√3/2</td><td>√2/2</td><td>1/2</td><td>0</td></tr>
-          <tr><td>sin α</td><td>0</td><td>1/2</td><td>√2/2</td><td>√3/2</td><td>1</td></tr>
-        </table>
-
-        <h3>5. Formules d'addition</h3>
-        <div class="propriete">
-          <strong>Propriétés</strong>
-          <ul class="liste">
-            <li>cos(a + b) = cos a cos b − sin a sin b</li>
-            <li>cos(a − b) = cos a cos b + sin a sin b</li>
-            <li>sin(a + b) = sin a cos b + cos a sin b</li>
-            <li>sin(a − b) = sin a cos b − cos a sin b</li>
-          </ul>
-        </div>
-
-        <h3>6. Équations trigonométriques</h3>
-        <div class="methode">
-          <strong>Méthode</strong>
-          <ul class="liste">
-            <li>cos x = cos α ⟺ x = α + 2kπ ou x = −α + 2kπ.</li>
-            <li>sin x = sin α ⟺ x = α + 2kπ ou x = π − α + 2kπ.</li>
-          </ul>
-        </div>
-
-        <div class="exemple">
-          <strong>Exemple résolu</strong>
-          Résoudre cos x = 1/2 sur [0 ; 2π].<br>
-          cos x = cos(π/3) ⟹ x = π/3 ou x = −π/3 + 2π = 5π/3.<br>
-          S = {π/3 ; 5π/3}.
-        </div>
-
-      </div>
-    </details>
-
-    <!-- CHAPITRE 8 -->
-    <details class="chapitre" id="chap8">
-      <summary>Chapitre 8 — Nombres et calculs</summary>
-      <div class="chapitre-contenu">
-
-        <h3>1. Nombres réels et intervalles</h3>
-        <div class="definition">
-          <strong>Définition</strong>
-          L'ensemble des réels ℝ contient tous les nombres (rationnels et irrationnels). Les intervalles sont notés [a ; b], ]a ; b[, [a ; +∞[, etc.
-        </div>
-
-        <h3>2. Racines carrées</h3>
-        <div class="propriete">
-          <strong>Propriétés</strong>
-          <ul class="liste">
-            <li>√(ab) = √a · √b (pour a, b ≥ 0).</li>
-            <li>√(a/b) = √a / √b (b > 0).</li>
-            <li>√(a²) = |a|.</li>
-          </ul>
-        </div>
-
-        <h3>3. Puissances</h3>
-        <div class="propriete">
-          <strong>Propriétés</strong>
-          <ul class="liste">
-            <li>aᵐ · aⁿ = aᵐ⁺ⁿ</li>
-            <li>aᵐ / aⁿ = aᵐ⁻ⁿ</li>
-            <li>(aᵐ)ⁿ = aᵐⁿ</li>
-            <li>a⁻ⁿ = 1/aⁿ</li>
-            <li>a⁰ = 1 (a ≠ 0)</li>
-          </ul>
-        </div>
-
-        <h3>4. Valeur absolue</h3>
-        <div class="definition">
-          <strong>Définition</strong>
-          |x| = x si x ≥ 0, et |x| = −x si x ≤ 0. Géométriquement, |x| est la distance entre x et 0.
-        </div>
-        <div class="propriete">
-          <strong>Propriétés</strong>
-          <ul class="liste">
-            <li>|xy| = |x|·|y|</li>
-            <li>|x| = |y| ⟺ x = y ou x = −y</li>
-            <li>|x| ≤ r ⟺ −r ≤ x ≤ r</li>
-            <li>Inégalité triangulaire : |x + y| ≤ |x| + |y|</li>
-          </ul>
-        </div>
-
-        <h3>5. Ordre et inégalités</h3>
-        <div class="propriete">
-          <strong>Propriétés</strong>
-          <ul class="liste">
-            <li>Si a ≤ b, alors a + c ≤ b + c.</li>
-            <li>Si a ≤ b et c > 0, alors ac ≤ bc.</li>
-            <li>Si a ≤ b et c < 0, alors ac ≥ bc (inversion du sens).</li>
-          </ul>
-        </div>
-
-        <div class="exemple">
-          <strong>Exemple résolu</strong>
-          Résoudre |2x − 3| ≤ 5.<br>
-          ⟺ −5 ≤ 2x − 3 ≤ 5<br>
-          ⟺ −2 ≤ 2x ≤ 8<br>
-          ⟺ −1 ≤ x ≤ 4. S = [−1 ; 4].
-        </div>
-
-      </div>
-    </details>
-
-    <!-- CHAPITRE 9 -->
-    <details class="chapitre" id="chap9">
-      <summary>Chapitre 9 — Algorithmique et Python</summary>
-      <div class="chapitre-contenu">
-
-        <h3>1. Notion d'algorithme</h3>
-        <div class="definition">
-          <strong>Définition</strong>
-          Un <strong>algorithme</strong> est une suite finie d'instructions permettant de résoudre un problème. Il peut être traduit en langage de programmation (Python, par exemple).
-        </div>
-
-        <h3>2. Variables et affectation</h3>
-        <div class="propriete">
-          <strong>Propriétés</strong>
-          Une variable stocke une valeur. En Python : <code>x = 5</code> affecte 5 à x. On peut aussi affecter plusieurs variables : <code>a, b = 1, 2</code>.
-        </div>
-
-        <h3>3. Instructions conditionnelles</h3>
-        <div class="exemple">
-          <strong>Exemple</strong>
-          <pre style="background:#0b2d4b;color:#f1c40f;padding:1rem;border-radius:10px;overflow-x:auto;font-family:'Courier New',monospace;">
-if x > 0:
-    print("positif")
-elif x == 0:
-    print("nul")
-else:
-    print("négatif")</pre>
-        </div>
-
-        <h3>4. Boucles</h3>
-        <div class="exemple">
-          <strong>Boucle for</strong>
-          <pre style="background:#0b2d4b;color:#f1c40f;padding:1rem;border-radius:10px;overflow-x:auto;font-family:'Courier New',monospace;">
-for i in range(5):
-    print(i)   # affiche 0,1,2,3,4</pre>
-          <strong>Boucle while</strong>
-          <pre style="background:#0b2d4b;color:#f1c40f;padding:1rem;border-radius:10px;overflow-x:auto;font-family:'Courier New',monospace;">
-n = 0
-while n < 5:
-    n = n + 1</pre>
-        </div>
-
-        <h3>5. Fonctions</h3>
-        <div class="exemple">
-          <strong>Exemple</strong>
-          <pre style="background:#0b2d4b;color:#f1c40f;padding:1rem;border-radius:10px;overflow-x:auto;font-family:'Courier New',monospace;">
-def carre(x):
-    return x * x
-
-print(carre(4))   # 16</pre>
-        </div>
-
-        <h3>6. Applications mathématiques</h3>
-        <div class="methode">
-          <strong>Exemples d'algorithmes utiles</strong>
-          <ul class="liste">
-            <li>Calcul de la somme des n premiers entiers.</li>
-            <li>Recherche du maximum d'une liste.</li>
-            <li>Résolution approchée d'équations (dichotomie).</li>
-            <li>Simulation de tirages aléatoires (module random).</li>
-          </ul>
-        </div>
-
-        <div class="exemple">
-          <strong>Exemple complet — Somme 1 + 2 + … + n</strong>
-          <pre style="background:#0b2d4b;color:#f1c40f;padding:1rem;border-radius:10px;overflow-x:auto;font-family:'Courier New',monospace;">
-def somme(n):
-    s = 0
-    for i in range(1, n+1):
-        s = s + i
-    return s
-
-print(somme(10))   # 55</pre>
-        </div>
-
-      </div>
-    </details>
-
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <h2>📬 Contact</h2>
-    <div class="chapitre" style="padding:2rem;">
-      <p>Une question sur un cours, une remarque ou une suggestion ? Écris-nous à <strong>contact@premierb3.math</strong></p>
-      <p style="margin-top:.6rem;color:#4a5f73;">Premier B3 — La plateforme pour maîtriser les mathématiques de Première B.</p>
     </div>
-  </section>
 
-</main>
+    <!-- CHAPITRE 3 : DÉRIVATION -->
+    <div class="chapitre" id="ch3">
+        <h3><i>3</i> Dérivation</h3>
+        <div class="contenu">
+            <div class="cours">
+                <h4>3.1 Nombre dérivé</h4>
+                <p>Le nombre dérivé de f en a est la limite du taux d'accroissement :</p>
+                <div class="formule">f'(a) = lim (h→0) [f(a+h) − f(a)] / h</div>
+                <p>Il correspond au coefficient directeur de la tangente à la courbe au point d'abscisse a.</p>
 
-<footer>
-  <p><strong>Premier B3</strong> — Plateforme d'apprentissage des mathématiques en Première B.</p>
-  <p style="margin-top:.6rem;font-size:.85rem;">© 2025 Premier B3. Tous droits réservés.</p>
-</footer>
+                <h4>3.2 Formules de dérivation</h4>
+                <ul>
+                    <li>(k)' = 0 (k constante)</li>
+                    <li>(xⁿ)' = n·xⁿ⁻¹</li>
+                    <li>(√x)' = 1/(2√x)</li>
+                    <li>(1/x)' = −1/x²</li>
+                    <li>(u+v)' = u' + v'</li>
+                    <li>(u·v)' = u'v + uv'</li>
+                    <li>(u/v)' = (u'v − uv')/v²</li>
+                    <li>(uⁿ)' = n·uⁿ⁻¹·u'</li>
+                </ul>
 
-<script>
-  document.querySelectorAll('nav a, .carte-nav').forEach(a => {
-    a.addEventListener('click', e => {
-      const href = a.getAttribute('href');
-      if (href && href.startsWith('#')) {
-        e.preventDefault();
-        const t = document.querySelector(href);
-        if (t) { t.scrollIntoView({behavior:'smooth', block:'start'}); if (t.tagName === 'DETAILS') t.open = true; }
-      }
-    });
-  });
-</script>
+                <h4>3.3 Équation de la tangente</h4>
+                <div class="formule">y = f'(a)(x − a) + f(a)</div>
 
-</body>
-</html>
+                <h4>3.4 Variations et dérivée</h4>
+                <ul>
+                    <li>Si f' &gt; 0 sur un intervalle, alors f est croissante.</li>
+                    <li>Si f' &lt; 0 sur un intervalle, alors f est décroissante.</li>
+                    <li>Si f' = 0, c'est un point critique (extremum possible).</li>
+                </ul>
+            </div>
+
+            <div class="exercice">
+                <h5>📝 Exercice corrigé 1</h5>
+                <div class="enonce">
+                    <p>Soit f(x) = x³ − 3x² + 2. Calculer f'(x), puis f'(1) et l'équation de la tangente en x = 1.</p>
+                </div>
+                <div class="corrige">
+                    <p><strong>Corrigé :</strong></p>
+                    <p>f'(x) = 3x² − 6x.</p>
+                    <p>f'(1) = 3 − 6 = −3.</p>
+                    <p>f(1) = 1 − 3 + 2 = 0.</p>
+                    <p>Tangente : y = f'(1)(x − 1) + f(1) = −3(x − 1) + 0 = <strong>−3x + 3</strong>.</p>
+                </div>
+            </div>
+
+            <div class="exercice">
+                <h5>📝 Exercice corrigé 2</h5>
+                <div class="enonce">
+                    <p>Étudier les variations de f(x) = x² − 4x + 1 sur ℝ.</p>
+                </div>
+                <div class="corrige">
+                    <p><strong>Corrigé :</strong></p>
+                    <p>f'(x) = 2x − 4.</p>
+                    <p>f'(x) = 0 ⟺ x = 2.</p>
+                    <p>Pour x &lt; 2 : f'(x) &lt; 0 → f décroissante.</p>
+                    <p>Pour x &gt; 2 : f'(x) &gt; 0 → f croissante.</p>
+                    <p>Minimum en x = 2 : f(2) = 4 − 8 + 1 = <strong>−3</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHAPITRE 4 : STATISTIQUES -->
+    <div class="chapitre" id="ch4">
+        <h3><i>4</i> Statistiques</h3>
+        <div class="contenu">
+            <div class="cours">
+                <h4>4.1 Vocabulaire</h4>
+                <ul>
+                    <li><strong>Population</strong> : ensemble étudié.</li>
+                    <li><strong>Caractère</strong> : propriété étudiée (quantitatif ou qualitatif).</li>
+                    <li><strong>Effectif</strong> : nombre d'individus d'une catégorie.</li>
+                    <li><strong>Fréquence</strong> : effectif / effectif total.</li>
+                </ul>
+
+                <h4>4.2 Moyenne</h4>
+                <div class="formule">x̄ = (n₁x₁ + n₂x₂ + ... + nₖxₖ) / N</div>
+                <p>où N est l'effectif total.</p>
+
+                <h4>4.3 Médiane et quartiles</h4>
+                <ul>
+                    <li><strong>Médiane</strong> : valeur qui partage la série en deux groupes de même effectif.</li>
+                    <li><strong>Q1</strong> : 1er quartile (25 % des valeurs lui sont inférieures ou égales).</li>
+                    <li><strong>Q3</strong> : 3e quartile (75 %).</li>
+                    <li><strong>Écart interquartile</strong> : Q3 − Q1.</li>
+                </ul>
+
+                <h4>4.4 Variance et écart-type</h4>
+                <div class="formule">V = (1/N) Σ nᵢ(xᵢ − x̄)² &nbsp; ; &nbsp; σ = √V</div>
+                <p>L'écart-type mesure la dispersion autour de la moyenne.</p>
+            </div>
+
+            <div class="exercice">
+                <h5>📝 Exercice corrigé 1</h5>
+                <div class="enonce">
+                    <p>Série : notes 8, 12, 15, 10, 14, 9, 11, 13. Calculer la moyenne et l'étendue.</p>
+                </div>
+                <div class="corrige">
+                    <p><strong>Corrigé :</strong></p>
+                    <p>Somme = 8+12+15+10+14+9+11+13 = 92. Effectif = 8.</p>
+                    <p>Moyenne = 92/8 = <strong>11,5</strong>.</p>
+                    <p>Étendue = max − min = 15 − 8 = <strong>7</strong>.</p>
+                </div>
+            </div>
+
+            <div class="exercice">
+                <h5>📝 Exercice corrigé 2</h5>
+                <div class="enonce">
+                    <p>Notes : 10 (coef 2), 12 (coef 1), 15 (coef 3). Calculer la moyenne pondérée.</p>
+                </div>
+                <div class="corrige">
+                    <p><strong>Corrigé :</strong></p>
+                    <p>Total points = 10×2 + 12×1 + 15×3 = 20 + 12 + 45 = 77.</p>
+                    <p>Total coefficients = 2 + 1 + 3 = 6.</p>
+                    <p>Moyenne = 77/6 ≈ <strong>12,83</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHAPITRE 5 : PROBABILITÉS -->
+    <div class="chapitre" id="ch5">
+        <h3><i>5</i> Probabilités</h3>
+        <div class="contenu">
+            <div class="cours">
+                <h4>5.1 Vocabulaire</h4>
+                <ul>
+                    <li><strong>Univers</strong> Ω : ensemble des issues possibles.</li>
+                    <li><strong>Événement</strong> : sous-ensemble de Ω.</li>
+                    <li><strong>Événement élémentaire</strong> : un seul élément.</li>
+                    <li><strong>Événement certain</strong> : Ω. <strong>Impossible</strong> : ∅.</li>
+                </ul>
+
+                <h4>5.2 Probabilité</h4>
+                <p>Sur un univers fini, on définit une probabilité P qui vérifie :</p>
+                <div class="formule">P(Ω) = 1 &nbsp; ; &nbsp; 0 ≤ P(A) ≤ 1 &nbsp; ; &nbsp; P(A ∪ B) = P(A) + P(B) si A et B disjoints</div>
+
+                <h4>5.3 Équiprobabilité</h4>
+                <div class="formule">P(A) = (nombre d'issues favorables à A) / (nombre total d'issues)</div>
+
+                <h4>5.4 Événement contraire et réunion</h4>
+                <div class="formule">P(Ā) = 1 − P(A)<br>P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</div>
+            </div>
+
+            <div class="exercice">
+                <h5>📝 Exercice corrigé 1</h5>
+                <div class="enonce">
+                    <p>On lance un dé équilibré à 6 faces. Quelle est la probabilité d'obtenir un nombre pair ?</p>
+   
