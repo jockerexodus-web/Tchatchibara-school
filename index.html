@@ -1,152 +1,109 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#1e3c72">
-    <title>Tchatchibara School</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tchatchibara-Web School - Téléchargement Direct</title>
+<style>
+  :root {
+    --bleu-marine: #1a3b5c;
+    --jaune-orange: #f39c12;
+    --gris-clair: #f4f6f9;
+    --blanc: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+  body { background-color: var(--gris-clair); color: #2c3e50; line-height: 1.6; }
+  
+  header { background: var(--blanc); padding: 16px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+  .logo { font-weight: bold; font-size: 20px; color: var(--bleu-marine); display: flex; gap: 8px; }
+  .logo span { color: var(--jaune-orange); }
+
+  .app-container { max-width: 800px; margin: 40px auto; background: var(--blanc); border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); overflow: hidden; }
+  .app-header { display: flex; padding: 30px; gap: 24px; border-bottom: 1px solid #e1e8ed; }
+  .app-icon { width: 100px; height: 100px; background: linear-gradient(135deg, var(--bleu-marine), #2a5a8c); border-radius: 24px; display: flex; align-items: center; justify-content: center; color: var(--blanc); font-size: 40px; font-weight: bold; flex-shrink: 0; }
+  .app-info h1 { font-size: 28px; color: var(--bleu-marine); margin-bottom: 4px; }
+  .app-developer { color: var(--jaune-orange); font-weight: 600; margin-bottom: 12px; font-size: 14px; }
+  .app-stats { display: flex; gap: 20px; font-size: 13px; color: #7f8c8d; margin-bottom: 16px; }
+  .app-stats strong { color: #2c3e50; font-size: 15px; }
+
+  /* LE BOUTON DE TÉLÉCHARGEMENT DIRECT */
+  .btn-download {
+    display: inline-block;
+    background: var(--jaune-orange);
+    color: var(--bleu-marine);
+    font-weight: 700;
+    font-size: 16px;
+    padding: 14px 40px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.2s;
+    box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);
+  }
+  .btn-download:hover { background: #e67e22; transform: translateY(-2px); }
+
+  .app-content { padding: 30px; }
+  .section-title { font-size: 18px; color: var(--bleu-marine); margin-bottom: 16px; font-weight: 700; }
+  .description { color: #555; font-size: 15px; margin-bottom: 30px; }
+  .tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; }
+  .tag { background: var(--gris-clair); color: var(--bleu-marine); padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+  
+  .screenshots { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 10px; margin-bottom: 30px; }
+  .screenshots img { height: 300px; border-radius: 12px; border: 1px solid #e1e8ed; object-fit: cover; }
+  
+  footer { text-align: center; padding: 30px; color: #95a5a6; font-size: 14px; }
+  footer strong { color: var(--bleu-marine); }
+
+  @media (max-width: 600px) {
+    .app-header { flex-direction: column; align-items: center; text-align: center; padding: 20px; }
+    .btn-download { width: 100%; text-align: center; }
+    .screenshots img { height: 250px; }
+  }
+</style>
 </head>
 <body>
 
-    <main id="app">
-        <!-- ================= PAGE ACCUEIL ================= -->
-        <div id="page-accueil" class="page active">
-            <header class="app-header">
-                <div class="tabs-top">
-                    <span class="tab active">Accueil</span>
-                </div>
-            </header>
+  <header><div class="logo">Tchatchibara<span>-Web School</span></div></header>
 
-            <div class="hero-app">
-                <h1>Bienvenue sur</h1>
-                <h2>TCHATCHIBARA-WEB<br>SCHOOL</h2>
-                <p class="desc">
-                    Plateforme éducative conforme au programme officiel du Gabon. Cours, exercices corrigés, devoirs du Bac et explications détaillées.
-                </p>
-                <p class="credit">Informatique by SAKAMOTO Dev.</p>
-                <button class="btn-orange" onclick="goToPage('cours')">Voir les cours</button>
-            </div>
-
-            <div class="section-programme">
-                <h3>Programme du Gabon</h3>
-                <div class="niveaux-app">
-                    <button class="btn-niveau orange" onclick="goToPage('cours', '2nde')">2nde</button>
-                    <button class="btn-niveau jaune" onclick="goToPage('cours', '1ère')">1ère</button>
-                    <button class="btn-niveau jaune" onclick="goToPage('cours', 'Terminale')">Terminale</button>
-                </div>
-                <button class="btn-epreuve" onclick="goToPage('cours', 'Bac')">Épreuves Bac</button>
-            </div>
+  <div class="app-container">
+    <div class="app-header">
+      <div class="app-icon">TWS</div>
+      <div class="app-info">
+        <h1>Tchatchibara-Web School</h1>
+        <div class="app-developer">Par SAKAMOTO Dev.</div>
+        <div class="app-stats">
+          <div><strong>1 000+</strong><br>Téléchargements</div>
+          <div><strong>4.8 ★</strong><br>Note</div>
+          <div><strong>15 Mo</strong><br>Taille</div>
         </div>
 
-        <!-- ================= PAGE COURS ================= -->
-        <div id="page-cours" class="page">
-            <header class="app-header">
-                <h2 class="header-title">📚 Les Cours</h2>
-            </header>
-
-            <div class="niveaux-app" style="padding: 15px;">
-                <button class="btn-niveau active-niv" onclick="filtrerNiveau('tous', this)">Tous</button>
-                <button class="btn-niveau" onclick="filtrerNiveau('2nde', this)">2nde</button>
-                <button class="btn-niveau" onclick="filtrerNiveau('1ère', this)">1ère</button>
-                <button class="btn-niveau" onclick="filtrerNiveau('Terminale', this)">Terminale</button>
-            </div>
-
-            <div class="cours-grid-app" id="coursGrid"></div>
-        </div>
-
-        <!-- ================= PAGE COMMUNAUTÉ (CHAT) ================= -->
-        <div id="page-communaute" class="page">
-            <header class="app-header">
-                <h2 class="header-title">💬 Espace Élèves</h2>
-            </header>
-            
-            <div class="chat-container">
-                <div class="chat-messages" id="chatMessages"></div>
-                <div class="chat-input-area">
-                    <input type="text" id="chatInput" placeholder="Écris un message..." onkeypress="envoyerMessage(event)">
-                    <button onclick="envoyerMessage()">➤</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= PAGE COMMENTAIRES ================= -->
-        <div id="page-commentaires" class="page">
-            <header class="app-header">
-                <h2 class="header-title">⭐ Avis & Commentaires</h2>
-            </header>
-
-            <div class="commentaires-container">
-                <div class="form-card-app" style="margin-bottom: 20px;">
-                    <h3>Laisser un commentaire</h3>
-                    <form onsubmit="ajouterCommentaire(event)">
-                        <input type="text" id="comNom" placeholder="Ton nom ou pseudo" required>
-                        <textarea id="comTexte" placeholder="Qu'as-tu pensé de la plateforme ?" required style="width: 100%; padding: 14px 16px; margin-bottom: 12px; border: 2px solid rgba(255,255,255,0.2); border-radius: 10px; background: rgba(255,255,255,0.95); font-size: 15px; outline: none; font-family: inherit; resize: vertical; min-height: 80px;"></textarea>
-                        <button type="submit">Publier</button>
-                    </form>
-                </div>
-                <div id="listeCommentaires"></div>
-            </div>
-        </div>
-
-        <!-- ================= PAGE PROFIL ================= -->
-        <div id="page-profil" class="page">
-            <header class="app-header">
-                <h2 class="header-title">👤 Mon Profil</h2>
-            </header>
-
-            <div class="profil-app">
-                <div class="avatar-app" id="avatar">?</div>
-                <h2 id="profilNom">Invité</h2>
-                <p class="email-app" id="profilEmail">Connectez-vous pour voir votre profil</p>
-
-                <div class="stats-app">
-                    <div class="stat-item">
-                        <h4 id="statCours">0</h4>
-                        <p>Cours</p>
-                    </div>
-                    <div class="stat-item">
-                        <h4 id="statPdf">0</h4>
-                        <p>PDF</p>
-                    </div>
-                    <div class="stat-item">
-                        <h4 id="statNiveau">-</h4>
-                        <p>Niveau</p>
-                    </div>
-                </div>
-
-                <a href="compte.html" class="btn-orange" style="display:block; margin-top:30px; text-decoration:none; text-align:center;">
-                    Modifier / Créer un compte
-                </a>
-            </div>
-        </div>
-    </main>
-
-    <!-- ================= BOTTOM NAVIGATION (5 ONGLETS) ================= -->
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item active" onclick="goToPage('accueil'); return false;">
-            <span class="icon">🏠</span>
-            <span class="label">Accueil</span>
+        <!-- ⬇️ C'EST ICI QUE TOUT SE JOUE ⬇️ -->
+        <!-- Remplace "tchatchibara-web-school.apk" par le lien direct de ton fichier -->
+        <a href="tchatchibara-web-school.apk" class="btn-download" download>
+          ⬇️ Télécharger l'APK (Lien Direct)
         </a>
-        <a href="#" class="nav-item" onclick="goToPage('cours'); return false;">
-            <span class="icon">📚</span>
-            <span class="label">Cours</span>
-        </a>
-        <a href="#" class="nav-item" onclick="goToPage('communaute'); return false;">
-            <span class="icon">💬</span>
-            <span class="label">Chat</span>
-        </a>
-        <a href="#" class="nav-item" onclick="goToPage('commentaires'); return false;">
-            <span class="icon">⭐</span>
-            <span class="label">Avis</span>
-        </a>
-        <a href="#" class="nav-item" onclick="goToPage('profil'); return false;">
-            <span class="icon">👤</span>
-            <span class="label">Profil</span>
-        </a>
-    </nav>
+        <p style="font-size: 12px; color: #7f8c8d; margin-top: 10px;">Téléchargement direct · Android 8.0+</p>
+      </div>
+    </div>
 
-    <script src="script.js"></script>
+    <div class="app-content">
+      <div class="section-title">À propos de cette application</div>
+      <div class="description">
+        <strong>Plateforme éducative conforme au programme officiel du Gabon.</strong><br><br>
+        Bienvenue sur Tchatchibara-Web School, l'application conçue pour accompagner les élèves de la 2nde, 1ère et Terminale (Préparation Bac). Retrouvez tous vos cours, discutez en privé ou dans l'espace élèves, publiez vos statuts et suivez votre progression.
+      </div>
+      
+      <div class="section-title">Fonctionnalités</div>
+      <div class="tags">
+        <span class="tag">📚 Cours du programme</span>
+        <span class="tag">💬 Messagerie privée</span>
+        <span class="tag">👥 Espace élèves</span>
+        <span class="tag">📸 Statuts (24h)</span>
+        <span class="tag">🔔 Notifications</span>
+      </div>
+    </div>
+  </div>
+
+  <footer>Développé par <strong>SAKAMOTO Dev.</strong> · © 2024 Tchatchibara-Web School</footer>
+
 </body>
 </html>
