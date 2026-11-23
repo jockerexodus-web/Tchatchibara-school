@@ -1,0 +1,17 @@
+{
+  "name": "loom-gabon",
+  "version": "1.0.0",
+  "description": "Loom Gabon — Vends en vidéo, sans écrire. by Tchatchibara Tech © 2026/2027",
+  "author": "Tchatchibara Tech",
+  "license": "MIT",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1",
+    "openai": "^4.67.0",
+    "dotenv": "^16.4.5"
+  }
+}
