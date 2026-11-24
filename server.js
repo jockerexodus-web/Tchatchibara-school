@@ -7,39 +7,51 @@ const crypto = require("crypto");
 const OpenAI = require("openai");
 
 const app = express();
-// ⬇️ CHANGEMENT : PORT dynamique pour Vercel
-const PORT = process.env.PORT || 3000;require("dotenv").config();
-const express = require("express");
-const multer = require("multer");
-const fs = require("fs");
-const path = require("path");
-const crypto = require("crypto");
-const OpenAI = require("openai");
+// PORT dynamique pour Vercel (il impose son propre port via process.env.PORT)
+const PORT = process.env.PORT || 3000;
 
-const app = express();
-const PORT = 3000;
 const DB_FILE = path.join(__dirname, "db.json");
 const UPLOAD_DIR = path.join(__dirname, "uploads");
 
 // ---------- BRANDING ----------
-const APP_NAME     = process.env.APP_NAME     || "Loom Gabon";
-const APP_COMPANY  = process.env.APP_COMPANY  || "Tchatchibara Tech";
-const APP_COPYRIGHT= process.env.APP_COPYRIGHT|| "© 2026/2027 Tchatchibara Tech";
+const APP_NAME      = process.env.APP_NAME      || "Loom Gabon";
+const APP_COMPANY   = process.env.APP_COMPANY   || "Tchatchibara Tech";
+const APP_COPYRIGHT = process.env.APP_COPYRIGHT || "© 2026/2027 Tchatchibara Tech";
 
 const openai = process.env.OPENAI_API_KEY?.startsWith("sk-")
   ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
   : null;
 
 // ---------- INIT ----------
-if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR);
-if (!fs.existsSync(DB_FILE)) fs.writeFileSync(DB_FILE, '{"products":[]}');
+// Sur Vercel le FS est en lecture seule : on entoure les écritures de try/catch
+try {
+  if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR);
+  if (!fs.existsSync(DB_FILE)) fs.writeFileSync(DB_FILE, '{"products":[]}');
+} catch (e) {
+  console.warn("⚠️ FS non inscriptible (normal sur Vercel) :", e.message);
+}
 
-const readDB = () => JSON.parse(fs.readFileSync(DB_FILE, "utf8"));
-const writeDB = (db) => fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2));
+const readDB = () => {
+  try {
+    return JSON.parse(fs.readFileSync(DB_FILE, "utf8"));
+  } catch {
+    return { products: [] };
+  }
+};
+
+const writeDB = (db) => {
+  try {
+    fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2));
+  } catch (e) {
+    console.warn("⚠️ Impossible d'écrire dans db.json :", e.message);
+  }
+};
 
 // ---------- UPLOAD ----------
+// Sur Vercel, multer écrit dans /tmp (seul dossier inscriptible)
+const uploadDir = process.env.VERCEL ? "/tmp" : UPLOAD_DIR;
 const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => cb(null, UPLOAD_DIR),
+  destination: (_req, _file, cb) => cb(null, uploadDir),
   filename: (_req, file, cb) => {
     const ext = path.extname(file.originalname) || ".webm";
     cb(null, Date.now() + "-" + crypto.randomBytes(4).toString("hex") + ext);
@@ -49,7 +61,7 @@ const upload = multer({ storage, limits: { fileSize: 100 * 1024 * 1024 } });
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use("/uploads", express.static(UPLOAD_DIR));
+app.use("/uploads", express.static(uploadDir));
 
 // ---------- HELPERS ----------
 const slugify = (s) =>
@@ -210,17 +222,22 @@ app.get("/record", (_req, res) => {
         const btn = document.getElementById('saveBtn');
         btn.disabled = true; btn.textContent = 'Génération...';
 
-        const r = await fetch('/api/generate', { method: 'POST', body: fd });
-        const data = await r.json();
-        btn.disabled = false; btn.textContent = '✨ Générer ma page de vente';
+        try {
+          const r = await fetch('/api/generate', { method: 'POST', body: fd });
+          const data = await r.json();
+          btn.disabled = false; btn.textContent = '✨ Générer ma page de vente';
 
-        if (data.slug) {
-          const url = window.location.origin + '/preview/' + data.slug;
-          result.innerHTML =
-            '<div class="alert">✅ Ta page est prête !<br>' +
-            '<a href="' + url + '" target="_blank">' + url + '</a></div>';
-        } else {
-          alert('Erreur : ' + (data.error || 'inconnue'));
+          if (data.slug) {
+            const url = window.location.origin + '/preview/' + data.slug;
+            result.innerHTML =
+              '<div class="alert">✅ Ta page est prête !<br>' +
+              '<a href="' + url + '" target="_blank">' + url + '</a></div>';
+          } else {
+            alert('Erreur : ' + (data.error || 'inconnue'));
+          }
+        } catch (err) {
+          btn.disabled = false; btn.textContent = '✨ Générer ma page de vente';
+          alert('Erreur réseau : ' + err.message);
         }
       };
     </script>
@@ -306,13 +323,18 @@ app.post("/api/generate", upload.single("video"), async (req, res) => {
   }
 });
 
-// ---------- GO ----------
-app.listen(PORT, () => {
-  console.log("\n╔════════════════════════════════════════════╗");
-  console.log("║   🎬  LOOM GABON                           ║");
-  console.log("║   by Tchatchibara Tech                     ║");
-  console.log("║   © 2026/2027 — Tous droits réservés       ║");
-  console.log("╚════════════════════════════════════════════╝");
-  console.log(`\n🌐 http://localhost:${PORT}`);
-  console.log(openai ? "🤖 IA activée (OpenAI)\n" : "⚠️  Pas de clé OpenAI → descriptions statiques\n");
-});
+// ---------- EXPORT POUR VERCEL ----------
+module.exports = app;
+
+// ---------- LANCEMENT LOCAL UNIQUEMENT ----------
+if (process.env.NODE_ENV !== "production" && !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log("\n╔════════════════════════════════════════════╗");
+    console.log("║   🎬  LOOM GABON                           ║");
+    console.log("║   by Tchatchibara Tech                     ║");
+    console.log("║   © 2026/2027 — Tous droits réservés       ║");
+    console.log("╚════════════════════════════════════════════╝");
+    console.log(`\n🌐 http://localhost:${PORT}`);
+    console.log(openai ? "🤖 IA activée (OpenAI)\n" : "⚠️  Pas de clé OpenAI → descriptions statiques\n");
+  });
+}
