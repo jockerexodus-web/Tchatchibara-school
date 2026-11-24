@@ -7,6 +7,16 @@ const crypto = require("crypto");
 const OpenAI = require("openai");
 
 const app = express();
+// ⬇️ CHANGEMENT : PORT dynamique pour Vercel
+const PORT = process.env.PORT || 3000;require("dotenv").config();
+const express = require("express");
+const multer = require("multer");
+const fs = require("fs");
+const path = require("path");
+const crypto = require("crypto");
+const OpenAI = require("openai");
+
+const app = express();
 const PORT = 3000;
 const DB_FILE = path.join(__dirname, "db.json");
 const UPLOAD_DIR = path.join(__dirname, "uploads");
