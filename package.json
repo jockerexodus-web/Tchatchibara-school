@@ -5,8 +5,12 @@
   "author": "Tchatchibara Tech",
   "license": "MIT",
   "main": "server.js",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "echo 'no build needed'"
   },
   "dependencies": {
     "express": "^4.19.2",
